@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎹 Ultimate Musical Keyboard - Pro Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen overflow-x-hidden py-4">
+
+    <!-- Animated Background -->
+    <div class="particles-container"></div>
+    <div class="music-notes-container"></div>
+
+    <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+
+        <!-- Header with Stats -->
+        <div class="text-center mb-8 animate-fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-3 tracking-tight glow-text">
+                🎹 Ultimate Musical Keyboard
+            </h1>
+            <p class="text-lg md:text-xl text-purple-200 mb-4">Professional Music Creation Studio</p>
+
+            <!-- Stats Bar -->
+            <div class="flex justify-center gap-4 flex-wrap">
+                <div class="stat-badge">
+                    <i class="fas fa-music"></i> <span id="notesPlayed">0</span> Notes
+                </div>
+                <div class="stat-badge">
+                    <i class="fas fa-clock"></i> <span id="sessionTime">00:00</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fas fa-fire"></i> <span id="streak">0</span> Streak
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizer with Waveform -->
+        <div class="visualizer-container mb-6">
+            <canvas id="visualizer" class="w-full h-40 rounded-xl"></canvas>
+        </div>
+
+        <!-- Piano Keyboard - Extended -->
+        <div class="keyboard-container mb-6">
+            <div class="piano-wrapper">
+                <div class="piano-keys">
+                    <!-- Lower Octave -->
+                    <div class="key white-key" data-key="z" data-note="C3">
+                        <span class="key-label">Z</span>
+                        <span class="note-label">C3</span>
+                    </div>
+                    <div class="key black-key" data-key="s" data-note="C#3">
+                        <span class="key-label">S</span>
+                    </div>
+                    <div class="key white-key" data-key="x" data-note="D3">
+                        <span class="key-label">X</span>
+                        <span class="note-label">D3</span>
+                    </div>
+                    <div class="key black-key" data-key="d" data-note="D#3">
+                        <span class="key-label">D</span>
+                    </div>
+                    <div class="key white-key" data-key="c" data-note="E3">
+                        <span class="key-label">C</span>
+                        <span class="note-label">E3</span>
+                    </div>
+                    <div class="key white-key" data-key="v" data-note="F3">
+                        <span class="key-label">V</span>
+                        <span class="note-label">F3</span>
+                    </div>
+                    <div class="key black-key" data-key="g" data-note="F#3">
+                        <span class="key-label">G</span>
+                    </div>
+                    <div class="key white-key" data-key="b" data-note="G3">
+                        <span class="key-label">B</span>
+                        <span class="note-label">G3</span>
+                    </div>
+                    <div class="key black-key" data-key="h" data-note="G#3">
+                        <span class="key-label">H</span>
+                    </div>
+                    <div class="key white-key" data-key="n" data-note="A3">
+                        <span class="key-label">N</span>
+                        <span class="note-label">A3</span>
+                    </div>
+                    <div class="key black-key" data-key="j" data-note="A#3">
+                        <span class="key-label">J</span>
+                    </div>
+                    <div class="key white-key" data-key="m" data-note="B3">
+                        <span class="key-label">M</span>
+                        <span class="note-label">B3</span>
+                    </div>
+
+                    <!-- Middle Octave -->
+                    <div class="key white-key" data-key="q" data-note="C4">
+                        <span class="key-label">Q</span>
+                        <span class="note-label">C4</span>
+                    </div>
+                    <div class="key black-key" data-key="2" data-note="C#4">
+                        <span class="key-label">2</span>
+                    </div>
+                    <div class="key white-key" data-key="w" data-note="D4">
+                        <span class="key-label">W</span>
+                        <span class="note-label">D4</span>
+                    </div>
+                    <div class="key black-key" data-key="3" data-note="D#4">
+                        <span class="key-label">3</span>
+                    </div>
+                    <div class="key white-key" data-key="e" data-note="E4">
+                        <span class="key-label">E</span>
+                        <span class="note-label">E4</span>
+                    </div>
+                    <div class="key white-key" data-key="r" data-note="F4">
+                        <span class="key-label">R</span>
+                        <span class="note-label">F4</span>
+                    </div>
+                    <div class="key black-key" data-key="5" data-note="F#4">
+                        <span class="key-label">5</span>
+                    </div>
+                    <div class="key white-key" data-key="t" data-note="G4">
+                        <span class="key-label">T</span>
+                        <span class="note-label">G4</span>
+                    </div>
+                    <div class="key black-key" data-key="6" data-note="G#4">
+                        <span class="key-label">6</span>
+                    </div>
+                    <div class="key white-key" data-key="y" data-note="A4">
+                        <span class="key-label">Y</span>
+                        <span class="note-label">A4</span>
+                    </div>
+                    <div class="key black-key" data-key="7" data-note="A#4">
+                        <span class="key-label">7</span>
+                    </div>
+                    <div class="key white-key" data-key="u" data-note="B4">
+                        <span class="key-label">U</span>
+                        <span class="note-label">B4</span>
+                    </div>
+                    <div class="key white-key" data-key="i" data-note="C5">
+                        <span class="key-label">I</span>
+                        <span class="note-label">C5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Control Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+
+            <!-- Song Library -->
+            <div class="control-card">
+                <h3 class="card-title">
+                    <i class="fas fa-music"></i> Song Library
+                </h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="song-btn" data-song="twinkle">⭐ Twinkle</button>
+                    <button class="song-btn" data-song="happy">🎂 Birthday</button>
+                    <button class="song-btn" data-song="jingle">🔔 Jingle</button>
+                    <button class="song-btn" data-song="mario">🍄 Mario</button>
+                    <button class="song-btn" data-song="starwars">⚔️ Star Wars</button>
+                    <button class="song-btn" data-song="tetris">🎮 Tetris</button>
+                    <button class="song-btn" data-song="pirates">🏴‍☠️ Pirates</button>
+                    <button class="song-btn" data-song="zelda">🗡️ Zelda</button>
+                </div>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="control-card">
+                <h3 class="card-title">
+                    <i class="fas fa-sliders-h"></i> Playback
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex gap-2">
+                        <button id="playBtn" class="control-btn flex-1 bg-green-500 hover:bg-green-600">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button id="pauseBtn" class="control-btn flex-1 bg-yellow-500 hover:bg-yellow-600">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button id="stopBtn" class="control-btn flex-1 bg-red-500 hover:bg-red-600">
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                    </div>
+
+                    <!-- Speed Control -->
+                    <div>
+                        <label class="text-white text-xs font-semibold mb-1 block">
+                            <i class="fas fa-tachometer-alt"></i> Speed: <span id="speedValue">1.0x</span>
+                        </label>
+                        <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" class="slider">
+                    </div>
+
+                    <!-- Volume Control -->
+                    <div>
+                        <label class="text-white text-xs font-semibold mb-1 block">
+                            <i class="fas fa-volume-up"></i> Volume: <span id="volumeValue">70%</span>
+                        </label>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="70" class="slider">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recording & Effects -->
+            <div class="control-card">
+                <h3 class="card-title">
+                    <i class="fas fa-microphone"></i> Recording
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex gap-2">
+                        <button id="recordBtn" class="control-btn flex-1 bg-red-600 hover:bg-red-700">
+                            <i class="fas fa-circle"></i> Record
+                        </button>
+                        <button id="playRecordingBtn" class="control-btn flex-1 bg-blue-500 hover:bg-blue-600" disabled>
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                    </div>
+                    <div id="recordingStatus" class="text-center text-purple-200 text-xs hidden">
+                        <i class="fas fa-circle animate-pulse text-red-500"></i> Recording...
+                    </div>
+
+                    <!-- Instrument Selection -->
+                    <div>
+                        <label class="text-white text-xs font-semibold mb-1 block">
+                            <i class="fas fa-guitar"></i> Instrument
+                        </label>
+                        <select id="instrumentSelect"
+                            class="w-full bg-purple-800/50 text-white rounded-lg px-3 py-2 text-sm">
+                            <option value="sine">🎹 Piano</option>
+                            <option value="square">🎸 Guitar</option>
+                            <option value="sawtooth">🎺 Brass</option>
+                            <option value="triangle">🎻 Strings</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Features Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+            <!-- Effects Panel -->
+            <div class="control-card">
+                <h3 class="card-title">
+                    <i class="fas fa-magic"></i> Sound Effects
+                </h3>
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="effect-btn" data-effect="reverb">
+                        <i class="fas fa-water"></i> Reverb
+                    </button>
+                    <button class="effect-btn" data-effect="delay">
+                        <i class="fas fa-clock"></i> Delay
+                    </button>
+                    <button class="effect-btn" data-effect="distortion">
+                        <i class="fas fa-bolt"></i> Distortion
+                    </button>
+                    <button class="effect-btn" data-effect="chorus">
+                        <i class="fas fa-layer-group"></i> Chorus
+                    </button>
+                    <button class="effect-btn" data-effect="vibrato">
+                        <i class="fas fa-wave-square"></i> Vibrato
+                    </button>
+                    <button class="effect-btn active" data-effect="none">
+                        <i class="fas fa-times"></i> None
+                    </button>
+                </div>
+            </div>
+
+            <!-- Metronome & Tools -->
+            <div class="control-card">
+                <h3 class="card-title">
+                    <i class="fas fa-tools"></i> Tools
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <button id="metronomeBtn" class="control-btn flex-1 bg-indigo-500 hover:bg-indigo-600">
+                            <i class="fas fa-drum"></i> Metronome
+                        </button>
+                        <input type="number" id="bpmInput" value="120" min="40" max="240"
+                            class="w-20 bg-purple-800/50 text-white rounded-lg px-2 py-2 text-sm text-center">
+                        <span class="text-white text-xs">BPM</span>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button id="loopBtn" class="control-btn flex-1 bg-purple-500 hover:bg-purple-600">
+                            <i class="fas fa-redo"></i> Loop
+                        </button>
+                        <button id="randomBtn" class="control-btn flex-1 bg-pink-500 hover:bg-pink-600">
+                            <i class="fas fa-random"></i> Random
+                        </button>
+                        <button id="clearBtn" class="control-btn flex-1 bg-gray-500 hover:bg-gray-600">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Now Playing & Info -->
+        <div class="control-card">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div id="nowPlaying" class="hidden">
+                    <div class="flex items-center gap-3">
+                        <div class="music-bars">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold">Now Playing</p>
+                            <p class="text-purple-200 text-sm" id="currentSong">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 flex-wrap">
+                    <button id="helpBtn" class="icon-btn" title="Keyboard Shortcuts">
+                        <i class="fas fa-keyboard"></i>
+                    </button>
+                    <button id="fullscreenBtn" class="icon-btn" title="Fullscreen">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <button id="themeBtn" class="icon-btn" title="Change Theme">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <button id="shareBtn" class="icon-btn" title="Share">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Tips -->
+        <div class="text-center mt-6 text-purple-300 text-xs">
+            <p>💡 Press <kbd class="kbd">Space</kbd> to play/pause | <kbd class="kbd">Esc</kbd> to stop | <kbd
+                    class="kbd">R</kbd> to record</p>
+        </div>
+    </div>
+
+    <!-- Modern Footer -->
+    <footer class="footer-section relative z-10 mt-12">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+
+                    <!-- About Section -->
+                    <div class="footer-column">
+                        <h3 class="footer-title">
+                            <i class="fas fa-music"></i> Musical Keyboard
+                        </h3>
+                        <p class="footer-text">
+                            A professional music creation studio built with passion.
+                            Create, record, and share your musical masterpieces with the world.
+                        </p>
+                        <div class="footer-stats">
+                            <div class="footer-stat-item">
+                                <i class="fas fa-guitar"></i>
+                                <span>25 Keys</span>
+                            </div>
+                            <div class="footer-stat-item">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>8 Songs</span>
+                            </div>
+                            <div class="footer-stat-item">
+                                <i class="fas fa-magic"></i>
+                                <span>5 Effects</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="footer-column">
+                        <h3 class="footer-title">
+                            <i class="fas fa-link"></i> Quick Links
+                        </h3>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="document.getElementById('helpBtn').click(); return false;">
+                                    <i class="fas fa-keyboard"></i> Keyboard Shortcuts
+                                </a></li>
+                            <li><a href="#"
+                                    onclick="document.querySelector('.piano-keys').scrollIntoView({behavior: 'smooth'}); return false;">
+                                    <i class="fas fa-piano"></i> Piano Keyboard
+                                </a></li>
+                            <li><a href="#" onclick="document.getElementById('recordBtn').click(); return false;">
+                                    <i class="fas fa-circle"></i> Start Recording
+                                </a></li>
+                            <li><a href="#" onclick="document.getElementById('shareBtn').click(); return false;">
+                                    <i class="fas fa-share-alt"></i> Share App
+                                </a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Connect Section -->
+                    <div class="footer-column">
+                        <h3 class="footer-title">
+                            <i class="fas fa-user-circle"></i> Connect With Me
+                        </h3>
+                        <p class="footer-text mb-4">
+                            Let's connect and create something amazing together!
+                        </p>
+                        <div class="social-links">
+                            <a href="https://github.com/Ankit2006Rajand" target="_blank" rel="noopener noreferrer"
+                                class="social-link github" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/ankit-raj-226a36309" target="_blank"
+                                rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:ankit9905163014@gmail.com" class="social-link email" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                        <div class="contact-info">
+                            <a href="mailto:ankit9905163014@gmail.com" class="email-link">
+                                <i class="fas fa-paper-plane"></i>
+                                ankit9905163014@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="footer-divider"></div>
+
+                <!-- Bottom Footer -->
+                <div class="footer-bottom">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p class="footer-copyright">
+                            <i class="fas fa-heart text-red-400"></i>
+                            Made with passion by <strong>Ankit Raj</strong>
+                        </p>
+                        <p class="footer-copyright">
+                            © 2024 Musical Keyboard. All rights reserved.
+                        </p>
+                        <div class="footer-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Web Audio API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated Wave Background -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="wave-path"></path>
+            </svg>
+        </div>
+    </footer>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">⌨️ Keyboard Shortcuts</h2>
+                <button id="closeModal" class="text-white text-2xl hover:text-purple-300">&times;</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
+                <div>
+                    <h3 class="font-semibold mb-2 text-purple-300">Playback</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li><kbd class="kbd">Space</kbd> - Play/Pause</li>
+                        <li><kbd class="kbd">Esc</kbd> - Stop</li>
+                        <li><kbd class="kbd">↑/↓</kbd> - Volume</li>
+                        <li><kbd class="kbd">←/→</kbd> - Speed</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2 text-purple-300">Recording</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li><kbd class="kbd">R</kbd> - Start/Stop Recording</li>
+                        <li><kbd class="kbd">P</kbd> - Play Recording</li>
+                        <li><kbd class="kbd">L</kbd> - Toggle Loop</li>
+                        <li><kbd class="kbd">M</kbd> - Metronome</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
