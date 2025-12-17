@@ -1,6 +1,8 @@
 # 🎹 Ultimate Musical Keyboard - Pro Edition
 
 A professional web-based music creation studio built with vanilla JavaScript and the Web Audio API. Create, record, and share your musical masterpieces directly in your browser!
+<img width="1363" height="638" alt="image" src="https://github.com/user-attachments/assets/e60b9771-39a1-40c5-b564-6fcbfdf091a8" />
+<img width="1102" height="536" alt="image" src="https://github.com/user-attachments/assets/fe6693ea-8a28-4849-9125-ffb8e28abf0d" />
 
 ## ✨ Features
 
