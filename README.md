@@ -204,7 +204,7 @@ const themes = [
 
 **Ankit Raj**
 
-- GitHub: [@Ankit2006Rajand](https://github.com/Ankit2006Rajand)
+- GitHub: [@Ankit2006Rajand](https://github.com/Ankit2006Raj)
 - LinkedIn: [Ankit Raj](https://www.linkedin.com/in/ankit-raj-226a36309)
 - Email: ankit9905163014@gmail.com
 
